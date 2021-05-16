@@ -1,0 +1,20 @@
+LOGIN
+
+/login/selecionar?CodigoAluno=142 >get
+/login?login=rodrigo&senha=12345&site=trina >get
+FILHOS
+/filhos?cpfResp=cpf >get
+IMAGENS
+/fotoAluno?CodigoAluno=142 >get
+MATRICULA
+/matricula?CodigoAluno >get
+NOTIFICAÇÃO
+/notification?pushToken=&AlunoCodigo&tipo >POST
+
+/notification/todo?titulo=textoTitulo&mensagem=texto >get epush para todos os alunos e pais da escola
+/notification/turma?titulo=textoTitulo&mensagem=texto&TurmaCodigo=123&AnoBase =2020 &tipo = "1 para enviar para os alunos 2 para enviar para os pais 0 para enviar para ambos" 
+/notification/selecinado?titulo=textoTitulo&mensagem=texto&AlunoCodigo=123,321 &tipo = "1 para enviar para os alunos 2 para enviar para os pais 0 para enviar para ambos" 
+
+gerar token 27022017jesusestavoltando
+
+/gerarToken?site=triena

@@ -1,11 +1,11 @@
 const mysql = require('mysql')
 require('dotenv').config()
 
-const HOST = process.env.BD_HOST || 'localhost';
-const USER = process.env.BD_USER || 'digital';
-const PASSWORD = process.env.BD_PASSWORD || 'ykk578on';
+const HOST = process.env.BD_HOST || '89.40.2.211';
+const USER = process.env.BD_USER || 'master';
+const PASSWORD = process.env.BD_PASSWORD || '30912650';
 const PORT = Number( process.env.BD_PORT || 3306 );
-const DATABASE = process.env.BD_DATABASE || 'clientes';
+const DATABASE = process.env.BD_DATABASE || 'ServidorStream';
 const TIMEZONE = process.env.TIMEZONE || 'utc';
 const CHARSET = process.env.CHARSET || 'utf8';
 

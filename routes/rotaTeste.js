@@ -12,7 +12,7 @@ const {queryCliente} = require('../sql/mysqlClientes');
 router.get('/',(req,res)=>{
    // const ResultQuery = await querySync('select * from Filmes');
 
-     querySync('select * from Filmes').then(result=>{
+     querySync('select * from Filmes limit 50;').then(result=>{
             res.send(result)
         
         }).catch(error=>{res.send(error)})
@@ -20,16 +20,35 @@ router.get('/',(req,res)=>{
    
 })
 
-router.get('/',(send)=>{
+router.get('/insert',(send)=>{
 	try{
        querySync(
 		'INSERT INTO Filmes (titulo,descricao,img_url,categoria,data_postagem,data_lancamento,elenco,class_indicativa) VALUES ("?","? ","?","?",now(),"?","?","?")').then(result=>{
-		res.send(result)
+		res.send(result);
 	})
 	}catch(error){
         res.send(error);
 	}
 })
 
+router.get('/update',(res,send)=>{
+	try{
+       querySync('UPDATE Filmes SET titulo = "?",descricao = "?",img_url = "?",categoria = "?",data_lancamento = "?",elenco = "?",class_indicativa = "?" WHERE id = ?;').then(result=>{
+       	res.send(result);
+       })
+	}catch(error){
+		res.send(error)
+	}
+})
+
+router.get('/delete',(res,send)=>{
+	try{
+       querySync('UPDATE Filmes SET exibir = "?" WHERE id = "?" ').then(result=>{
+       	res.send(result);
+       })
+	}catch(error){
+		res.send(error)
+	}
+})
 
 module.exports = router;

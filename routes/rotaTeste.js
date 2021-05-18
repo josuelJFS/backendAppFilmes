@@ -12,7 +12,7 @@ const {queryCliente} = require('../sql/mysqlClientes');
 router.get('/',(req,res)=>{
    // const ResultQuery = await querySync('select * from Filmes');
 
-     querySync('select * from Filmes limit 50;').then(result=>{
+     querySync('SELECT * FROM Filmes WHERE exibir = TRUE').then(result=>{
             res.send(result)
         
         }).catch(error=>{res.send(error)})

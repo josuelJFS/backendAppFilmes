@@ -23,10 +23,10 @@
     "nodemon": "^2.0.6"
   },
   "scripts": {
-    "dev": "nodemon servidorAlunoApp.js",
-    "start": "pm2 start servidorAlunoApp.js",
-    "restart": "pm2 restart servidorAlunoApp.js",
-    "logs": "pm2 logs servidorAlunoApp",
+    "dev": "nodemon stremServer.js",
+    "start": "pm2 start stremServer.js",
+    "restart": "pm2 restart stremServer.js",
+    "logs": "pm2 logs stremServer",
     "gitP": "git add . && git commit -m 'upservidorteste' && git push origin master ",
     "gitS": "git pull origin master && npm install && npm run restart && npm run logs",
     "deploy": "ssh -o StrictHostKeyChecking=no -l -p20200 root@ntdsoft.net 'cd / ; cd portaisntd/servidorAlunoApp'"

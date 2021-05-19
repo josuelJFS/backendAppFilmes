@@ -9,13 +9,29 @@ var mysql = require('mysql');
 const {queryCliente} = require('../sql/mysqlClientes');
 
 
-router.get('/',(req,res)=>{
-   // const ResultQuery = await querySync('select * from Filmes');
+router.get('/recente',async(req,res)=>{
+	
+   try {
+	const result = await querySync('SELECT * FROM Filmes WHERE exibir = TRUE limite=100');
+	if(result.lenght > 0){
+		res.json({
+			result:result,
+			status:true
+		});
+	}else{
+		res.json({
+			result:result,
+			status:false
+		});
+	}
+	
+   } catch (error) {
+	res.json({
+		error:error,
+		status:false
+	});
+   }
 
-     querySync('SELECT * FROM Filmes WHERE exibir = TRUE').then(result=>{
-            res.send(result)
-        
-        }).catch(error=>{res.send(error)})
 
    
 })

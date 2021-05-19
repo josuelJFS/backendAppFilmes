@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 
-const Filmes = require('./routes/rotaTeste');
+const Filmes = require('./routes/Filmes');
 
 const cors = require('cors');
 

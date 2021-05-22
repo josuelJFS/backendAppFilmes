@@ -53,23 +53,48 @@ router.post('/',async(eq,res)=>{
 	   }
 })
 
-router.get('/update',(res,send)=>{
+router.get('/update',async(req,res)=>{
 	try{
-       querySync('UPDATE Filmes SET titulo = "?",descricao = "?",img_url = "?",categoria = "?",data_lancamento = "?",elenco = "?",class_indicativa = "?" WHERE id = ?;').then(result=>{
-       	res.send(result);
-       })
+       
+       const result = await  querySync('UPDATE Filmes SET titulo = "?",descricao = "?",img_url = "?",categoria = "?",data_lancamento = "?",elenco = "?",class_indicativa = "?" WHERE id = "?";')
+	    if(result.length >0){
+          res.json({
+          	result:result,
+          	status:true
+          })
+	    }else{
+           res.json({
+           	result:result,
+           	status:false
+           })
+	    }
 	}catch(error){
-		res.send(error)
+		res.json({
+			error:error,
+			status:false
+		})
 	}
 })
 
-router.get('/delete',(res,send)=>{
+router.get('/delete',async(req,res)=>{
 	try{
-       querySync('UPDATE Filmes SET exibir = "?" WHERE id = "?" ').then(result=>{
-       	res.send(result);
-       })
+       const result = await querySync('UPDATE Filmes SET exibir = "?" WHERE id = "?" ');
+       if(result.length >0){
+          res.json({
+          	result:result,
+          	status:true
+          })
+	    }else{
+           res.json({
+           	result:result,
+           	status:false
+           })
+	    }
 	}catch(error){
-		res.send(error)
+		res.json({
+			error:error,
+			status:false
+		})
 	}
 })
 

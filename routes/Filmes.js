@@ -12,7 +12,7 @@ const {queryCliente} = require('../sql/mysqlClientes');
 router.get('/recente',async(req,res)=>{
 
    try {
-	const result = await querySync('SELECT * FROM Filmes WHERE exibir = TRUE limit 100');
+	const result = await querySync('SELECT * FROM Filmes limit 100');
 	if(result.lenght > 0){
 		res.json({
 			result:result,

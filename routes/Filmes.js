@@ -36,15 +36,21 @@ router.get('/recente',async(req,res)=>{
    
 })
 
-router.get('/insert',(send)=>{
-	try{
-       querySync(
-		'INSERT INTO Filmes (titulo,descricao,img_url,categoria,data_postagem,data_lancamento,elenco,class_indicativa) VALUES ("?","? ","?","?",now(),"?","?","?")').then(result=>{
-		res.send(result);
-	})
-	}catch(error){
-        res.send(error);
-	}
+router.post('/',async(eq,res)=>{
+	try {
+	    const {titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video} = eq.body;
+		const result = await querySync('insert into Filmes (titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video) values (?,?,?,?,?,?,?,?,?)',[titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video]);
+		res.json({
+			result:result,
+			status:true
+		});
+		
+	   } catch (error) {
+		res.json({
+			error:error,
+			status:false
+		});
+	   }
 })
 
 router.get('/update',(res,send)=>{

@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 
+
 const Filmes = require('./routes/Filmes');
+const robo = require('./routes/roboCapiture');
 
 const cors = require('cors');
 
@@ -12,6 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/filmes',Filmes);
+app.use('/robo',robo);
 
 
 app.use((req,res,next)=>{
@@ -19,6 +22,9 @@ app.use((req,res,next)=>{
         error:"rota não encontrada"
     });
 });
+
+
+
 
 
 

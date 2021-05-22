@@ -12,6 +12,7 @@
     "mysql": "^2.18.1",
     "nodejs-base64-converter": "^1.0.5",
     "nodemailer": "^6.4.17",
+    "puppeteer": "^9.1.1",
     "react-native-video": "^5.1.0-alpha8",
     "yarn": "^1.22.10"
   },

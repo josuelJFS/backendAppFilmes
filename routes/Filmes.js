@@ -36,34 +36,71 @@ router.get('/recente',async(req,res)=>{
    
 })
 
-router.get('/insert',(send)=>{
+router.get('/insert',async(req,res)=>{
 	try{
-       querySync(
-		'INSERT INTO Filmes (titulo,descricao,img_url,categoria,data_postagem,data_lancamento,elenco,class_indicativa) VALUES ("?","? ","?","?",now(),"?","?","?")').then(result=>{
-		res.send(result);
-	})
+       const result = await querySync('INSERT INTO Filmes (titulo,descricao,img_url,categoria,data_postagem,data_lancamento,elenco,class_indicativa) VALUES ("?","? ","?","?",now(),"?","?","?")');
+		   if(result.length > 0){
+		   	res.json({
+		   		result:result,
+		   		status:true
+		   	})
+		   }else{
+		   	res.json({
+		   		result:result,
+		   		status:false
+		   	})
+		   }
 	}catch(error){
-        res.send(error);
+		res.json({
+			error:error,
+			status:false
+		})
+        
 	}
 })
 
-router.get('/update',(res,send)=>{
+router.get('/update',async(req,res)=>{
 	try{
-       querySync('UPDATE Filmes SET titulo = "?",descricao = "?",img_url = "?",categoria = "?",data_lancamento = "?",elenco = "?",class_indicativa = "?" WHERE id = ?;').then(result=>{
-       	res.send(result);
-       })
+       
+       const result = await  querySync('UPDATE Filmes SET titulo = "?",descricao = "?",img_url = "?",categoria = "?",data_lancamento = "?",elenco = "?",class_indicativa = "?" WHERE id = "?";')
+	    if(result.length >0){
+          res.json({
+          	result:result,
+          	status:true
+          })
+	    }else{
+           res.json({
+           	result:result,
+           	status:false
+           })
+	    }
 	}catch(error){
-		res.send(error)
+		res.json({
+			error:error,
+			status:false
+		})
 	}
 })
 
-router.get('/delete',(res,send)=>{
+router.get('/delete',async(req,res)=>{
 	try{
-       querySync('UPDATE Filmes SET exibir = "?" WHERE id = "?" ').then(result=>{
-       	res.send(result);
-       })
+       const result = await querySync('UPDATE Filmes SET exibir = "?" WHERE id = "?" ');
+       if(result.length >0){
+          res.json({
+          	result:result,
+          	status:true
+          })
+	    }else{
+           res.json({
+           	result:result,
+           	status:false
+           })
+	    }
 	}catch(error){
-		res.send(error)
+		res.json({
+			error:error,
+			status:false
+		})
 	}
 })
 

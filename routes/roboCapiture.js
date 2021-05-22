@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const axios = require('axios').default
 const puppeteer = require('puppeteer');
 
 
@@ -40,7 +40,7 @@ router.get('/',(req,res)=>{
           const titulo = header.querySelector('h2').innerHTML;
           const ano = header.querySelector('span').innerHTML;
           console.log(titulo,imgLink);
-          filmes.push({titulo:titulo,anoLancamento:ano,img:imgLink,linkFrame:linkpagevideo})
+          filmes.push({titulo:titulo,data_lancamento:ano,img:imgLink,linkFrame:linkpagevideo})
           
           // const linkframe = document.querySelector('iframe').getAttribute('src');
          
@@ -57,7 +57,8 @@ router.get('/',(req,res)=>{
       
       const pag2info2 = await page2.evaluate(() => {
          var aa = document.querySelectorAll('article div')[2].querySelector('p').innerHTML;
-         return {url:document.querySelector('iframe').getAttribute('src'),descricao:aa};
+         var categoria = document.querySelector('article header div a').innerHTML
+         return {url:document.querySelector('iframe').getAttribute('src'),descricao:aa,categoria:categoria};
        })
       
     
@@ -106,7 +107,27 @@ router.get('/',(req,res)=>{
     
     
     await browser.close();
-    res.send({...dimensions[0],urlVideoPlayer:pag4info,descricao:pag2info2.descricao});
+    
+
+    try {
+        const resutado = await axios.post('http://89.40.2.211:3333/filmes',{
+        titulo:dimensions[0].titulo,
+        descricao:pag2info2.descricao,
+        url_img:dimensions[0].img,
+        categoria:pag2info2.categoria,
+        data_postagem:'2021-05-22',
+        data_lancamento:dimensions[0].data_lancamento,
+        elenco:'',
+        class_indicativa:'',
+        url_video:pag4info
+    })
+
+    res.send(resutado.data);
+    } catch (error) {
+        res.send(error);
+    }
+
+   
     
     
     

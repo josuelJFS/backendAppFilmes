@@ -9,6 +9,8 @@ router.get('/',(req,res)=>{
    
     const puppeteer = require('puppeteer');
     let descricao = '';
+
+    const correntPosition = 0;
     
     (async () => {
       const browser = await puppeteer.launch({
@@ -52,7 +54,7 @@ router.get('/',(req,res)=>{
       
      
       const page2 = await browser.newPage();
-      await page2.goto(dimensions[0].linkFrame,{ waitUntil: 'networkidle2'});
+      await page2.goto(dimensions[correntPosition].linkFrame,{ waitUntil: 'networkidle2'});
       
       
       const pag2info2 = await page2.evaluate(() => {
@@ -111,17 +113,17 @@ router.get('/',(req,res)=>{
 
     try {
         const resutado = await axios.post('http://89.40.2.211:3333/filmes',{
-        titulo:dimensions[0].titulo,
+        titulo:dimensions[correntPosition].titulo,
         descricao:pag2info2.descricao,
-        url_img:dimensions[0].img,
+        url_img:dimensions[correntPosition].img,
         categoria:pag2info2.categoria,
-        ano_lancamento:dimensions[0].data_lancamento,
+        ano_lancamento:dimensions[correntPosition].data_lancamento,
         elenco:'',
         class_indicativa:0,
         url_video:pag4info
     })
 
-    res.send(resutado.data);
+    res.send(resutado.data,{filme:0,maxFilmePage:dimensions.length});
     } catch (error) {
         res.send(error);
     }

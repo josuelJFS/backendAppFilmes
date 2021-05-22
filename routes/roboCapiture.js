@@ -123,7 +123,7 @@ router.get('/',(req,res)=>{
         url_video:pag4info
     })
 
-    res.send(resutado.data,{filme:0,maxFilmePage:dimensions.length});
+    res.send(resutado.data,{filme:correntPosition,maxFilmePage:dimensions.length});
     } catch (error) {
         res.send(error);
     }

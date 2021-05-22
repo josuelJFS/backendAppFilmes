@@ -117,7 +117,7 @@ router.get('/',(req,res)=>{
         categoria:pag2info2.categoria,
         ano_lancamento:dimensions[0].data_lancamento,
         elenco:'',
-        class_indicativa:'',
+        class_indicativa:0,
         url_video:pag4info
     })
 

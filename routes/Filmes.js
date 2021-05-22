@@ -39,7 +39,7 @@ router.get('/recente',async(req,res)=>{
 router.post('/',async(eq,res)=>{
 	try {
 	    const {titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video} = eq.body;
-		const result = await querySync('insert into Filmes (titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video) values (?,?,?,?,?,?,?,?,?)',[titulo,descricao,url_img,categoria,data_postagem,data_lancamento,elenco,class_indicativa,url_video]);
+		const result = await querySync('insert into Filmes (titulo,descricao,url_img,categoria,data_postagem,ano_lancamento,elenco,class_indicativa,url_video) values (?,?,?,?,now(),?,?,?,?)',[titulo,descricao,url_img,categoria,data_lancamento,elenco,class_indicativa,url_video]);
 		res.json({
 			result:result,
 			status:true

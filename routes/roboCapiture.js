@@ -115,8 +115,7 @@ router.get('/',(req,res)=>{
         descricao:pag2info2.descricao,
         url_img:dimensions[0].img,
         categoria:pag2info2.categoria,
-        data_postagem:'2021-05-22',
-        data_lancamento:dimensions[0].data_lancamento,
+        ano_lancamento:dimensions[0].data_lancamento,
         elenco:'',
         class_indicativa:'',
         url_video:pag4info

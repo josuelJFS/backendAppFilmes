@@ -10,7 +10,7 @@ router.get('/',(req,res)=>{
     const puppeteer = require('puppeteer');
     let descricao = '';
 
-    const correntPosition = 0;
+    const correntPosition = 2;
     
     (async () => {
       const browser = await puppeteer.launch({
@@ -123,7 +123,7 @@ router.get('/',(req,res)=>{
         url_video:pag4info
     })
 
-    res.send(resutado.data,{filme:correntPosition,maxFilmePage:dimensions.length});
+    res.send({resposta:resutado.data,filme:correntPosition,maxFilmePage:dimensions.length});
     } catch (error) {
         res.send(error);
     }

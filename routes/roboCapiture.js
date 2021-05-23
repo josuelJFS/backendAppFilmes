@@ -9,8 +9,9 @@ router.get('/',(req,res)=>{
    
     const puppeteer = require('puppeteer');
     let descricao = '';
+    const {valor} = req.query;
 
-    const correntPosition = 2;
+    const correntPosition = parseInt(valor);
     
     (async () => {
       const browser = await puppeteer.launch({
